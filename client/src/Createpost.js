@@ -7,11 +7,15 @@ function Createpost() {
 
     const handle = async(e)=>{
         e.preventDefault()
-        await axios.post("")
+        await axios.post("http://localhost:4000/posts",{
+            post
+        })
+
+        setPost("")
 
     }
     return (
-    <div className=''>
+    <div>
     <h1>Create a post</h1>
         <form onSubmit={handle}>
             <label>
