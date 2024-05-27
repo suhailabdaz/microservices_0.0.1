@@ -15,7 +15,6 @@ const events = []
 app.post("/events", async (req, res) => {
     const event = req.body;
     events.push(event)
-    console.log("Received event:", event);
             await axios.post("http://localhost:4000/events", event).catch((err)=>console.log(err))
             await axios.post("http://localhost:4001/events", event).catch((err)=>console.log(err))
             await axios.post("http://localhost:4002/events", event).catch((err)=>console.log(err))

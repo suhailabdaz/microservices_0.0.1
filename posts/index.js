@@ -18,7 +18,7 @@ app.get("/posts",(req,res)=>{
 
 app.post("/posts",async (req,res)=>{
 
-
+try{
     const id = randomBytes(4).toString("hex")
 
     const {post} = req.body
@@ -33,9 +33,10 @@ app.post("/posts",async (req,res)=>{
         }
     })
 
-
-
     res.status(201).send(posts[id])
+}catch(err){
+    console.log(err);
+}
 
 
 })
@@ -46,5 +47,6 @@ app.post("/events",(req,res)=>{
 })
 
 app.listen(4000,()=>{
+    console.log("latest version");
     console.log("listening to 4000");
 })

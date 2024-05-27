@@ -7,7 +7,7 @@ const app = express()
 app.use(bodyParser.json())
 app.use(cors())
 
-const handlereq= async()=>{
+const handlereq= async(type,data)=>{
     if(type=="commentCreated"){
         const status = data.comment.includes("orange") ? "rejected" : "approved";
         await axios.post("http://localhost:4005/events",{
@@ -31,6 +31,11 @@ app.post("/events",async(req,res)=>{
     res.send({})
 })
 
-app.listen(4003,()=>{
+app.listen(4003,async()=>{
     console.log("listening to 4003");
+    const res = await axios.get("http://localhost:4005/events")
+    for(let event of res.data){
+        console.log("processig data :",event.type);
+        handlereq(event.type,event.data)
+    }
 })
